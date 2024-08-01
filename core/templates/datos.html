@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!--METAHEADS-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--METAHEADS-->
+
+    <title>KPI Sucursales</title>
+
+    {% load static %}
+    <!--CSS-->
+    <link rel="stylesheet" href="{% static 'css/coord.css' %}">
+    <!--CSS-->
+
+</head>
+<body>
+    
+    <div id="detalle-datos">
+        <table>
+            <thead>
+                <tr>
+                    <th>Farmacia</th>
+                    <th>Legajo</th>
+                    <th>Tarea</th>
+                    <th>Fecha</th>
+                    <th>Cantidad</th>
+                    <th>Gestionado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dato in datos %}
+                <tr>
+                    <td>{{ dato.farmacia }}</td>
+                    <td>{{ dato.legajo }}</td>
+                    <td>{{ dato.tarea }}</td>
+                    <td>{{ dato.fecha }}</td>
+                    <td>{{ dato.cantidad }}</td>
+                    <td>{{ dato.gestionado }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

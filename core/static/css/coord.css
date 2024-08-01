@@ -1,0 +1,255 @@
+/*GENERAL SETTINGS*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+/*BODY*/
+
+/*HEADER IMAGE*/
+header {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 0;
+    border-bottom: .3px solid #bebebe5d;
+}
+.header-logo {
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+}
+.header-logo > img {
+    width: 100%;
+}
+
+/*SECTION UNO*/
+.section-uno {
+    width: 100%;
+    display: flex;
+}
+
+/* Estilos para el botón de menú hamburguesa */
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: fixed;
+    left: 45px;
+    z-index: 1000;
+}
+
+/* Estilos para el aside */
+.aside-menu {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    padding-top: 70px;
+    left: -250px;
+    background-color: #008080; /* Color de fondo del menú */
+    transition: left 0.3s ease;
+    z-index: 999;
+}
+
+.aside-menu.open {
+    left: 0;
+}
+
+.aside-menu-item {
+    padding: 10px 5px;
+    border-left: 3px solid #ffffff;
+    margin-bottom: 3px;
+    transition: .2s all ease-out;
+}
+
+.aside-menu-item:hover {
+    background: #2e9292;
+    padding: 10px 7px;
+}
+
+.aside-menu-item a {
+    color: #f2f2f2;
+    width: 100%;
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+}
+
+/*SECTION DOS*/
+.section-dos {
+    width: 100%;
+    height: 89.5vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffff;
+}
+
+/* Resumen General */
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.toggle-buttons button {
+    background-color: #00A19B;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.toggle-buttons button:hover {
+    background-color: #00a19cdc;
+}
+.resumen-general {
+    width: 90%;
+    margin: 20px 0 45px 0;
+}
+
+.resumen-general > h2{
+    margin-bottom: 20px;
+}
+
+.resumen-tarjetas {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tarjeta {
+    background-color: #e81f76;
+    border: 1px solid #e81f76;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    flex: 1;
+    margin: 0 10px;
+    color: #f2f2f2;
+}
+
+/* Detalle por Sector */
+.detalle-sector {
+    width: 90%;
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+}
+
+.detalle-tareas {
+    display: flex;
+    width: 600px;
+    height: 350px;
+}
+
+.detalle-tareas p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+/* Indicadores de Cumplimiento */
+.indicadores-cumplimiento {
+    width: 90%;
+    margin: 20px 0;
+}
+
+.indicador {
+    margin-bottom: 20px;
+}
+
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.toggle-buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.toggle-buttons button.active {
+    background-color: #138496;
+}
+
+.botones-sectores {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.botones-sectores button {
+    margin: 0 10px;
+    padding: 10px 30px;
+    background-color: #e81f76;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.botones-sectores button:active {
+    background-color: #e81f7669;
+}
+
+.detalle-sector .grafico-container {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilo para la tabla de datos */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+table thead th {
+    background-color: #e81f76;
+    color: white;
+    padding: 10px;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+
+table tbody td, table tbody th {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Contenedor de la tabla */
+#detalle-datos {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    box-sizing: border-box;
+}

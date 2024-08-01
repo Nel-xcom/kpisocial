@@ -1,0 +1,330 @@
+/*GENERAL SETTINGS*/
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+/*BODY*/
+
+/*HEADER IMAGE*/
+header{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 0;
+    border-bottom: .3px solid #bebebe5d;
+}
+.header-logo{
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+}
+.header-logo > img{
+    width: 100%;
+}
+
+/*SECTION UNO*/
+.section-uno{
+    width: 100%;
+    display: flex;
+}
+/* Estilos para el botón de menú hamburguesa */
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: fixed;
+    left: 45px;
+    z-index: 1000;
+}
+
+/* Estilos para el aside */
+.aside-menu {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    padding-top: 70px;
+    left: -250px;
+    background-color: #008080; /* Color de fondo del menú */
+    transition: left 0.3s ease;
+    z-index: 999;
+}
+
+.aside-menu.open {
+    left: 0;
+}
+
+.aside-menu-item {
+    padding: 10px 5px;
+    border-left: 3px solid #ffffff;
+    margin-bottom: 3px;
+    transition: .2s all ease-out;
+}
+
+.aside-menu-item:hover{
+    background: #2e9292;
+    padding: 10px 7px;
+}
+
+.aside-menu-item a {
+    color: #f2f2f2;
+    width: 100%;
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+}
+
+
+/*SECTION DOS*/
+.section-dos{
+    width: 100%;
+    height: 89.5vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffff;
+}
+
+/*FORMULARIO*/
+.formulario-size{
+    width: 70%;
+    padding: 10px;
+    background: #ffffff;
+    height: 60vh;
+    margin-top: 50px;
+    margin-bottom: 70px;
+    border-radius: 5px;
+    border: .3px solid #00a19c6b;
+    box-shadow: 0 0 4px 3px #2222221e;
+}
+.formulario-titulo{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    border-bottom: .3px solid #00a19c82;
+}
+.formulario-titulo > h3{
+    color: #222222;
+    font-size: 22px;
+    color: #008080;
+}
+form{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+.box-input{
+    width: 100%;
+    height: 25%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.box-input-size{
+    width: 50%;
+    height: 70px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.box-input-size > select{
+    width: 350px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: .3px solid #E81F76;
+}
+.box-input-size > input{
+    width: 350px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: .3px solid #E81F76;
+}
+.box-input > button{
+    padding: 10px;
+    width: 350px;
+    background: #E81F76;
+    border: none;
+    border-radius: 10px;
+    color: #f2f2f2;
+    box-shadow: 0 0 4px 3px #2222222e; 
+    transition: .15s all ease-in;  
+}
+.box-input > button:hover{
+    box-shadow: 0 0 4px 4px #22222244;
+}
+.box-inputsize{
+    width: 50%;
+    height: 70px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+.box-inputsize > input{
+    width: 350px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: .3px solid #E81F76;
+    margin-left: 4px;
+}
+/*FORMULARIO*/
+
+/*ANALISIS DE DATOS*/
+.analisis-size{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 35px;
+}
+
+.datos-caja{
+    width: 65%;
+    height: 88vh;
+    overflow-y: scroll;
+    background-color: #ffffff;
+}
+
+.datos-titulo{
+    width: 100%;
+    display: flex;
+    padding: 8px 0;
+    justify-content: space-between;
+    border-bottom: .3px solid #00a19c6b;
+}
+
+.datos-titulo > strong{
+    display: flex;
+    width: 16.5%;
+    justify-content: center;
+}
+
+.dato-item{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: start;
+    border-bottom: .3px solid #00a19c6b;
+    padding: 3px 0;
+}
+
+.dato-item > p{
+    display: flex;
+    width: 16.5%;
+    justify-content: center;
+    font-size: 14px;
+}
+
+/*INDICADORES-PORCENTAJES*/
+.caja-indicadores{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: .3px solid #00a19c3b;
+    box-shadow: 0 0 4px 3px #2222221e;
+    border-radius: 10px;
+}
+
+.indicadores-titulo{
+    width: 100%;
+    height: 35px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+}
+
+.indicadores-titulo > h3{
+    color: #222222;
+    font-size: 18px;
+}
+
+.indicadores-box{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.indicador1{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.porcentaje-total{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.porcentaje-total > h4{
+    color: #00A19B;
+    margin-bottom: 5px;
+}
+
+.porcentaje-total > strong{
+    border: 2px solid #00A19B;
+    padding: 20px;
+    border-radius: 50%;
+    color: #222222;
+    font-size: 17px;
+}
+
+.indicador2{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.indicador2 > h4{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #00A19B;
+    font-size: 14px;
+}
+
+.indicador2 > ul{
+    width: 100%;
+    list-style: none;
+    padding: 0 20px 5px 20px;
+}
+
+.indicador2 > ul > li{
+    width: 100%;
+    border-bottom: .3px solid #00a19c79;
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+.indicador2 > ul > li > strong{
+    color: #00A19B;
+    font-size: 13px;
+}
+/*INDICADORES-PORCENTAJES*/

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--METAHEADS-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--METAHEADS-->
+
+    <title>KPI Sucursales</title>
+
+    {% load static %}
+    <!--CSS-->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!--CSS-->
+
+    <!--FUENTE-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!--FUENTE-->    
+</head>
+<body>
+    
+    <!--HEADER SECTION-->
+    <header>
+        <button id="menu-toggle" class="menu-toggle">
+            &#9776; <!-- Icono de menú hamburguesa -->
+        </button>
+        <div class="header-logo">
+            <img src="{% static 'images/logo.png' %}" alt="Farmacia Social">
+        </div>
+    </header>
+    <!--HEADER SECTION-->
+
+    <!--SECTION-->
+    <section class="section-uno">
+
+        <!--MENU ASIDE-->
+        <aside class="aside-menu" id="aside-menu">
+            <div class="aside-menu-item">
+                <a href="{% url 'kpicoordinador' %}">Coordinadores</a>
+            </div>
+
+            <div class="aside-menu-item">
+                <a href="{% url 'kpistock' %}">Stock</a>
+            </div>
+
+            <div class="aside-menu-item">
+                <a href="{% url 'kpicaja' %}">Caja</a>
+            </div>
+
+            <div class="aside-menu-item">
+                <a href="{% url 'kpiexpertas' %}">Expertas</a>
+            </div>
+
+            <div class="aside-menu-item">
+                <a href="{% url 'kpitrade' %}">TradeMarketing</a>
+            </div>
+        </aside>
+        <!--MENU ASIDE-->
+
+        <!--FORMULARIO-->
+        <div class="section-dos">
+            <div class="formulario-size">
+                <div class="formulario-titulo">
+                    <h3>KPI Expertas en Belleza</h3>
+                </div>
+
+                <!--FORM-->
+                <form action="{% url 'kpiexpertas' %}" method="post">
+                    {% csrf_token %}
+                    <div class="box-input">
+                        <div class="box-input-size">
+                            <span>Farmacia</span>
+                            {{ form.farmacia }}
+                        </div>
+                        <div class="box-input-size">
+                            <span>Legajo</span>
+                            {{ form.legajo }}
+                        </div>
+                    </div>
+
+                    <div class="box-input">
+                        <div class="box-input-size">
+                            <span>Tarea</span>
+                            {{ form.tarea }}
+                        </div>
+                        <div class="box-inputsize">
+                            {{ form.fecha }}
+                        </div>
+                    </div>
+
+                    <div class="box-input">
+                        <div class="box-input-size">
+                            <span>Cantidad</span>
+                            {{ form.cantidad }}
+                        </div>
+                        <div class="box-input-size">
+                            <span>Gestionado</span>
+                            {{ form.gestionado }}
+                        </div>
+                    </div>
+                    <div class="box-input">
+                        <button type="submit">Guardar</button>
+                    </div>
+                </form>
+                <!--FORM-->
+            </div>
+
+            <div class="analisis-size">
+                <div class="datos-caja">
+                    <div class="datos-titulo">
+                        <strong>Farmacia</strong>
+                        <strong>Legajo</strong>
+                        <strong>Tarea</strong>
+                        <strong>Fecha</strong>
+                        <strong>Cantidad</strong>
+                        <strong>Gestionado</strong>
+                    </div>
+                    {% for dato in datos_expertas %}
+                    <div class="dato-item">
+                        <p>{{ dato.farmacia }}</p>
+                        <p>{{ dato.legajo }}</p>
+                        <p>{{ dato.tarea }}</p>
+                        <p>{{ dato.fecha }}</p>
+                        <p>{{ dato.cantidad }}</p>
+                        <p>{{ dato.gestionado }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="caja-indicadores">
+
+                    <div class="indicadores-titulo">
+                        <h3>Indicadores de Cumplimiento</h3>
+                    </div>
+
+                    <div class="indicadores-box">
+                        
+                        <div class="indicador1">
+                            <div class="porcentaje-total">
+                                <h4>Porcentaje Total:</h4>
+                                <strong>{{ porcentaje_total_cumplimiento }}%</strong>
+                            </div>
+                        </div>
+
+                        <div class="indicador2">
+                            <h4>Procentaje por Farmacia</h4>
+                            <ul>
+                                {% for farmacia, porcentaje in porcentaje_por_farmacia.items %}
+                                <li>
+                                    <strong>
+                                        {{ farmacia }}:
+                                    </strong> 
+                                    {{ porcentaje }}%
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!--FORMULARIO-->
+    </section>
+    <!--CONTENT SECTION-->
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('aside-menu').classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

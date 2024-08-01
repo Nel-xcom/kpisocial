@@ -1,0 +1,18 @@
+<div>
+    <label for="tarea-select">Selecciona Tarea:</label>
+    <select id="tarea-select">
+        {% for tarea, _ in tareas %}
+        <option value="{{ tarea }}">{{ tarea }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="farmacia-select">Selecciona Farmacia:</label>
+    <select id="farmacia-select">
+        {% for farmacia, _ in farmacias %}
+        <option value="{{ farmacia }}">{{ farmacia }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="fecha-select">Selecciona Fecha:</label>
+    <input type="date" id="fecha-select">
+</div>

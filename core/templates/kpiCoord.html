@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPI Sucursales</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/coord.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <button id="menu-toggle" class="menu-toggle">
+            &#9776;
+        </button>
+        <div class="header-logo">
+            <img src="{% static 'images/logo.png' %}" alt="Farmacia Social">
+        </div>
+    </header>
+
+    <section class="section-uno">
+        <aside class="aside-menu" id="aside-menu">
+            <div class="aside-menu-item">
+                <a href="{% url 'kpicoordinador' %}">Coordinadores</a>
+            </div>
+            <div class="aside-menu-item">
+                <a href="{% url 'kpistock' %}">Stock</a>
+            </div>
+            <div class="aside-menu-item">
+                <a href="{% url 'kpicaja' %}">Caja</a>
+            </div>
+            <div class="aside-menu-item">
+                <a href="{% url 'kpiexpertas' %}">Expertas</a>
+            </div>
+            <div class="aside-menu-item">
+                <a href="{% url 'kpitrade' %}">TradeMarketing</a>
+            </div>
+        </aside>
+
+        <div class="section-dos">
+            <div class="resumen-general">
+                <div class="toggle-buttons">
+                    <button id="btn-resumen">Resumen General</button>
+                    <button id="btn-detalle">Detalle por Farmacia</button>
+                </div>
+                <div id="contenido-resumen" class="contenido">
+                    <div class="resumen-tarjetas">
+                        <div class="tarjeta" data-sector="caja">
+                            <h3>Caja</h3>
+                            <p>{{ porcentaje_caja }}%</p>
+                            <p>{{ tareas_completadas_caja }}/{{ total_tareas_caja }} tareas completadas</p>
+                        </div>
+                        <div class="tarjeta" data-sector="expertas">
+                            <h3>Expertas en Belleza</h3>
+                            <p>{{ porcentaje_expertas }}%</p>
+                            <p>{{ tareas_completadas_expertas }}/{{ total_tareas_expertas }} tareas completadas</p>
+                        </div>
+                        <div class="tarjeta" data-sector="stock">
+                            <h3>Stock</h3>
+                            <p>{{ porcentaje_stock }}%</p>
+                            <p>{{ tareas_completadas_stock }}/{{ total_tareas_stock }} tareas completadas</p>
+                        </div>
+                        <div class="tarjeta" data-sector="trade">
+                            <h3>Trade Marketing</h3>
+                            <p>{{ porcentaje_trade }}%</p>
+                            <p>{{ tareas_completadas_trade }}/{{ total_tareas_trade }} tareas completadas</p>
+                        </div>
+                    </div>
+                    <div class="detalle-sector">
+                        <div class="grafico-container" id="div-caja">
+                            <h3>Caja</h3>
+                            <div class="detalle-tareas">
+                                <canvas id="grafico-caja"></canvas>
+                            </div>
+                        </div>
+                        <div class="grafico-container" id="div-expertas">
+                            <h3>Expertas en Belleza</h3>
+                            <div class="detalle-tareas">
+                                <canvas id="grafico-expertas"></canvas>
+                            </div>
+                        </div>
+                        <div class="grafico-container" id="div-stock">
+                            <h3>Stock</h3>
+                            <div class="detalle-tareas">
+                                <canvas id="grafico-stock"></canvas>
+                            </div>
+                        </div>
+                        <div class="grafico-container" id="div-trade">
+                            <h3>Trade Marketing</h3>
+                            <div class="detalle-tareas">
+                                <canvas id="grafico-trade"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="contenido-detalle" class="contenido" style="display:none;">
+                    <!-- Aquí puedes agregar el contenido detallado por farmacia -->
+                    <div class="botones-sectores">
+                        <button id="btn-caja">Caja</button>
+                        <button id="btn-expertas">Expertas en Belleza</button>
+                        <button id="btn-stock">Stock</button>
+                        <button id="btn-trade">Trade Marketing</button>
+                    </div>
+                    <div id="filtros"></div>
+                    <div id="detalle-datos"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('aside-menu').classList.toggle('open');
+        });
+    
+        document.getElementById('btn-resumen').addEventListener('click', function() {
+            document.getElementById('contenido-resumen').style.display = 'block';
+            document.getElementById('contenido-detalle').style.display = 'none';
+        });
+    
+        document.getElementById('btn-detalle').addEventListener('click', function() {
+            document.getElementById('contenido-resumen').style.display = 'none';
+            document.getElementById('contenido-detalle').style.display = 'block';
+        });
+    
+        const graficoDatosCaja = {{ grafico_datos_caja|safe }};
+        const graficoDatosExpertas = {{ grafico_datos_expertas|safe }};
+        const graficoDatosStock = {{ grafico_datos_stock|safe }};
+        const graficoDatosTrade = {{ grafico_datos_trade|safe }};
+    
+        const graficoCaja = document.getElementById('grafico-caja').getContext('2d');
+        const graficoExpertas = document.getElementById('grafico-expertas').getContext('2d');
+        const graficoStock = document.getElementById('grafico-stock').getContext('2d');
+        const graficoTrade = document.getElementById('grafico-trade').getContext('2d');
+    
+        const crearGraficoBarras = (ctx, datos) => {
+            const labels = datos.map(d => d.farmacia);
+            const valores = datos.map(d => d.total);
+    
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Tareas Completadas',
+                        data: valores,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        };
+    
+        crearGraficoBarras(graficoCaja, graficoDatosCaja);
+        crearGraficoBarras(graficoExpertas, graficoDatosExpertas);
+        crearGraficoBarras(graficoStock, graficoDatosStock);
+        crearGraficoBarras(graficoTrade, graficoDatosTrade);
+    
+        const cargarDatosSector = (sector) => {
+            fetch(`/api/datos/${sector}/`)
+                .then(response => response.json())
+                .then(data => {
+                    let html = '<table>';
+                    html += '<thead><tr><th>Farmacia</th><th>Legajo</th><th>Tarea</th><th>Fecha</th><th>Cantidad</th><th>Gestionado</th></tr></thead>';
+                    html += '<tbody>';
+                    data.forEach(item => {
+                        html += `<tr><td>${item.farmacia}</td><td>${item.legajo}</td><td>${item.tarea}</td><td>${item.fecha}</td><td>${item.cantidad}</td><td>${item.gestionado}</td></tr>`;
+                    });
+                    html += '</tbody></table>';
+                    document.getElementById('detalle-datos').innerHTML = html;
+                });
+        };
+    
+        document.getElementById('btn-caja').addEventListener('click', function() {
+            cargarDatosSector('caja');
+        });
+    
+        document.getElementById('btn-expertas').addEventListener('click', function() {
+            cargarDatosSector('expertas');
+        });
+    
+        document.getElementById('btn-stock').addEventListener('click', function() {
+            cargarDatosSector('stock');
+        });
+    
+        document.getElementById('btn-trade').addEventListener('click', function() {
+            cargarDatosSector('trade');
+        });
+    </script>
+</body>
+</html>
